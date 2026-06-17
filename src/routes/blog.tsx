@@ -28,7 +28,7 @@ function Blog() {
             key={post.slug}
             to="/blog/$slug"
             params={{ slug: post.slug }}
-            className="surface-card overflow-hidden hover:border-primary/40 transition-colors group"
+            className="surface-card overflow-hidden hover:border-primary/40 transition-colors group block"
           >
             {post.image && (
               <div className="aspect-video overflow-hidden">
