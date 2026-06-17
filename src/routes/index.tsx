@@ -5,9 +5,15 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "SaaS Animate — Animation Studio for SaaS Explainers, Demos & UI Motion" },
       { name: "description", content: "Premium animation studio for SaaS. We make explainer videos, product demos, UX/UI animation, launch films and brand motion that convert visitors into customers." },
+      { name: "keywords", content: "saas animation studio, saas explainer videos, product demo videos, ui motion design, saas launch video, brand motion, animated explainer video, motion design for saas" },
       { property: "og:title", content: "SaaS Animate — Animation Studio for SaaS" },
       { property: "og:description", content: "Explainer videos, product demos, UX/UI animation and launch films built to convert." },
       { property: "og:url", content: "/" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og-image.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "SaaS Animate — Animation Studio for SaaS" },
+      { name: "twitter:description", content: "Explainer videos, product demos, UX/UI animation and launch films built to convert." },
     ],
     links: [{ rel: "canonical", href: "/" }],
   }),
@@ -36,105 +42,135 @@ function Index() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 glow-grid pointer-events-none" aria-hidden />
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-primary/10 blur-[140px] pointer-events-none" aria-hidden />
-        <div className="container-page relative pt-20 md:pt-28 pb-20">
-          <p className="eyebrow eyebrow-dot"><span className="animate-pulse-dot">Booking Q3 · 2026</span></p>
-          <h1 className="mt-6 text-[2.75rem] sm:text-6xl md:text-7xl lg:text-8xl max-w-5xl">
-            Animation that <em className="text-primary not-italic">moves</em> SaaS metrics.
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-2xl">
-            We're a focused animation studio for SaaS teams. Explainer videos, product demos, UI motion and launch films
-            — engineered to convert, not decorate.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link to="/contact" className="btn-base btn-primary">Start a project →</Link>
-            <Link to="/portfolio" className="btn-base btn-ghost">See the work</Link>
+      <section className="relative min-h-[90vh] flex items-center">
+        <div className="container-page grid lg:grid-cols-2 gap-12 items-center pt-20 md:pt-28 pb-16">
+          <div>
+            <p className="eyebrow eyebrow-dot">Booking Q3 · 2026</p>
+            <h1 className="mt-6 text-5xl md:text-7xl font-display">
+              Animation that <em className="text-primary">moves</em> SaaS metrics.
+            </h1>
+            <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-xl">
+              We're a focused animation studio for SaaS teams. Explainer videos, product demos, UI motion and launch films
+              — engineered to convert, not decorate.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link to="/contact" className="btn-base btn-primary">
+                Start a project →
+              </Link>
+              <Link to="/portfolio" className="btn-base btn-outline">
+                See the work
+              </Link>
+            </div>
           </div>
-
-          {/* Hero visual */}
-          <div className="mt-16 surface-card p-3 md:p-4 relative">
-            <div className="aspect-[16/9] rounded-xl bg-gradient-to-br from-surface-elev via-background to-surface-elev relative overflow-hidden">
-              <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 gap-2 p-6">
-                <div className="col-span-3 row-span-6 rounded-lg hairline bg-surface" />
-                <div className="col-span-9 row-span-1 rounded-lg hairline bg-surface flex items-center px-4">
-                  <div className="flex gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-foreground/20" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-foreground/20" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-primary" />
-                  </div>
-                </div>
-                <div className="col-span-5 row-span-3 rounded-lg hairline bg-surface relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-end p-4">
-                    {[40, 65, 30, 80, 55, 92, 70].map((h, i) => (
-                      <div key={i} className="flex-1 mx-0.5 rounded-t bg-primary/70" style={{ height: `${h}%`, opacity: 0.3 + i * 0.1 }} />
-                    ))}
-                  </div>
-                </div>
-                <div className="col-span-4 row-span-3 rounded-lg hairline bg-surface flex items-center justify-center">
-                  <div className="relative w-24 h-24">
-                    <div className="absolute inset-0 rounded-full border-2 border-primary/30" />
-                    <div className="absolute inset-0 rounded-full border-2 border-primary border-r-transparent border-b-transparent animate-spin" style={{ animationDuration: "3s" }} />
-                  </div>
-                </div>
-                <div className="col-span-9 row-span-2 rounded-lg hairline bg-surface flex items-center px-6 gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">▶</div>
-                  <div className="flex-1">
-                    <div className="h-2 rounded-full bg-foreground/10 overflow-hidden">
-                      <div className="h-full w-2/3 bg-primary" />
-                    </div>
-                    <p className="mt-2 text-[0.65rem] font-mono text-muted-foreground">SAAS_EXPLAINER_V4.MP4 · 01:12 / 01:48</p>
-                  </div>
-                </div>
-              </div>
+          
+          {/* Hero Video */}
+          <div className="relative aspect-video rounded-2xl overflow-hidden surface-card group">
+            <video
+              className="w-full h-full object-cover"
+              poster="/videos/poster-explainer.png"
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src="/videos/saas-explainer.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+              <span className="font-mono text-xs text-white/80">SAAS_EXPLAINER_V4.MP4</span>
+              <span className="font-mono text-xs text-white/80">01:12 / 01:48</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* LOGO MARQUEE */}
-      <section className="border-y border-hairline py-10 overflow-hidden">
-        <p className="container-page eyebrow mb-6">Trusted by SaaS teams worldwide</p>
-        <div className="flex overflow-hidden">
-          <div className="flex gap-16 pr-16 animate-marquee whitespace-nowrap">
-            {[...logos, ...logos].map((l, i) => (
-              <span key={i} className="font-display text-2xl text-muted-foreground/70">{l}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section className="container-page py-24 md:py-32">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-          <div>
-            <p className="eyebrow eyebrow-dot">Services</p>
-            <h2 className="mt-4 text-4xl md:text-6xl max-w-2xl">A full motion stack for modern SaaS.</h2>
-          </div>
-          <Link to="/services" className="btn-base btn-ghost self-start">All services →</Link>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {services.map((s, i) => (
-            <article key={s.title} className="surface-card p-7 hover:border-primary/40 transition-colors group">
-              <p className="font-mono text-xs text-muted-foreground">0{i + 1}</p>
-              <h3 className="mt-3 text-2xl">{s.title}</h3>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-              <span className="mt-6 inline-block text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-            </article>
+      <section className="border-y border-border/40 py-8 overflow-hidden">
+        <p className="text-center font-mono text-xs text-muted-foreground mb-6">Trusted by SaaS teams worldwide</p>
+        <div className="flex gap-12 animate-marquee">
+          {[...logos, ...logos].map((l, i) => (
+            <span key={i} className="font-display text-2xl text-muted-foreground/60 whitespace-nowrap">
+              {l}
+            </span>
           ))}
         </div>
       </section>
 
+      {/* SERVICES */}
+      <section className="container-page py-24">
+        <p className="eyebrow eyebrow-dot">Services</p>
+        <h2 className="mt-6 text-4xl md:text-5xl max-w-3xl">A full motion stack for modern SaaS.</h2>
+        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {services.map((s, i) => (
+            <Link
+              key={i}
+              to="/services"
+              className="surface-card p-8 hover:border-primary/40 transition-colors group"
+            >
+              <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
+              <h3 className="mt-4 text-xl group-hover:text-primary transition-colors">{s.title}</h3>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+              <span className="mt-6 inline-block text-sm text-primary">→</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* VIDEO SHOWCASE */}
+      <section className="container-page py-24">
+        <p className="eyebrow eyebrow-dot">Recent Work</p>
+        <h2 className="mt-6 text-4xl md:text-5xl">See the motion in action.</h2>
+        <div className="mt-12 grid md:grid-cols-2 gap-6">
+          <div className="surface-card overflow-hidden group">
+            <div className="relative aspect-video">
+              <video
+                className="w-full h-full object-cover"
+                poster="/videos/poster-demo.png"
+                autoPlay
+                muted
+                loop
+                playsInline
+              >
+                <source src="/videos/saas-demo.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div className="p-6">
+              <p className="font-mono text-xs text-muted-foreground">Product Demo</p>
+              <h3 className="mt-2 text-xl">SaaS Demo Video</h3>
+              <p className="mt-2 text-sm text-muted-foreground">Animated product walkthrough with UI motion</p>
+            </div>
+          </div>
+          <div className="surface-card overflow-hidden group">
+            <div className="relative aspect-video">
+              <video
+                className="w-full h-full object-cover"
+                poster="/videos/poster-explainer.png"
+                autoPlay
+                muted
+                loop
+                playsInline
+              >
+                <source src="/videos/ui-motion.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div className="p-6">
+              <p className="font-mono text-xs text-muted-foreground">UI Motion</p>
+              <h3 className="mt-2 text-xl">Interface Animation System</h3>
+              <p className="mt-2 text-sm text-muted-foreground">Micro-interactions and transitions for SaaS UI</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PROCESS */}
-      <section className="container-page py-24 md:py-32 border-t border-hairline">
+      <section className="container-page py-24">
         <p className="eyebrow eyebrow-dot">Process</p>
-        <h2 className="mt-4 text-4xl md:text-6xl max-w-3xl">Predictable production. Premium output.</h2>
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-hairline">
+        <h2 className="mt-6 text-4xl md:text-5xl max-w-3xl">Predictable production. Premium output.</h2>
+        <div className="mt-12 grid md:grid-cols-4 gap-6">
           {process.map((p) => (
-            <div key={p.step} className="bg-background p-8">
-              <p className="font-mono text-primary text-sm">{p.step}</p>
-              <h3 className="mt-4 text-2xl">{p.title}</h3>
+            <div key={p.step} className="surface-card p-8">
+              <span className="font-mono text-sm text-primary">{p.step}</span>
+              <h3 className="mt-4 text-xl">{p.title}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
             </div>
           ))}
@@ -142,19 +178,20 @@ function Index() {
       </section>
 
       {/* CTA */}
-      <section className="container-page py-24 md:py-32">
-        <div className="surface-card p-10 md:p-16 relative overflow-hidden">
-          <div className="absolute -right-20 -bottom-20 w-[400px] h-[400px] rounded-full bg-primary/20 blur-3xl" aria-hidden />
-          <div className="relative max-w-2xl">
-            <p className="eyebrow eyebrow-dot">Let's build</p>
-            <h2 className="mt-4 text-4xl md:text-6xl">Your next video should pay for itself.</h2>
-            <p className="mt-5 text-muted-foreground text-lg">
-              Tell us about your launch, demo or onboarding flow. We'll come back in 24 hours with a scope and timeline.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/contact" className="btn-base btn-primary">Start a project</Link>
-              <Link to="/portfolio" className="btn-base btn-ghost">See recent work</Link>
-            </div>
+      <section className="container-page py-24">
+        <div className="surface-card p-12 md:p-16 text-center">
+          <p className="eyebrow eyebrow-dot">Let's build</p>
+          <h2 className="mt-6 text-4xl md:text-5xl">Your next video should pay for itself.</h2>
+          <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
+            Tell us about your launch, demo or onboarding flow. We'll come back in 24 hours with a scope and timeline.
+          </p>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <Link to="/contact" className="btn-base btn-primary">
+              Start a project
+            </Link>
+            <Link to="/portfolio" className="btn-base btn-outline">
+              See recent work
+            </Link>
           </div>
         </div>
       </section>
