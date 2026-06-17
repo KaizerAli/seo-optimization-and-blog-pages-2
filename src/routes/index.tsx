@@ -63,21 +63,16 @@ function Index() {
             </div>
           </div>
           
-          {/* Hero Video */}
+          {/* Hero Image - SaaS Dashboard */}
           <div className="relative aspect-video rounded-2xl overflow-hidden surface-card group">
-            <video
+            <img
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=675&fit=crop"
+              alt="SaaS Analytics Dashboard"
               className="w-full h-full object-cover"
-              poster="/videos/poster-explainer.png"
-              autoPlay
-              muted
-              loop
-              playsInline
-            >
-              <source src="/videos/saas-explainer.mp4" type="video/mp4" />
-            </video>
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-              <span className="font-mono text-xs text-white/80">SAAS_EXPLAINER_V4.MP4</span>
+              <span className="font-mono text-xs text-white/80">SAAS_DASHBOARD_UI.MP4</span>
               <span className="font-mono text-xs text-white/80">01:12 / 01:48</span>
             </div>
           </div>
@@ -123,16 +118,11 @@ function Index() {
         <div className="mt-12 grid md:grid-cols-2 gap-6">
           <div className="surface-card overflow-hidden group">
             <div className="relative aspect-video">
-              <video
-                className="w-full h-full object-cover"
-                poster="/videos/poster-demo.png"
-                autoPlay
-                muted
-                loop
-                playsInline
-              >
-                <source src="/videos/saas-demo.mp4" type="video/mp4" />
-              </video>
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop"
+                alt="Product Demo Video"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
             </div>
             <div className="p-6">
               <p className="font-mono text-xs text-muted-foreground">Product Demo</p>
@@ -142,16 +132,11 @@ function Index() {
           </div>
           <div className="surface-card overflow-hidden group">
             <div className="relative aspect-video">
-              <video
-                className="w-full h-full object-cover"
-                poster="/videos/poster-explainer.png"
-                autoPlay
-                muted
-                loop
-                playsInline
-              >
-                <source src="/videos/ui-motion.mp4" type="video/mp4" />
-              </video>
+              <img
+                src="https://images.unsplash.com/photo-1555421689-d68471e189f2?w=800&h=450&fit=crop"
+                alt="UI Motion Design"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
             </div>
             <div className="p-6">
               <p className="font-mono text-xs text-muted-foreground">UI Motion</p>
