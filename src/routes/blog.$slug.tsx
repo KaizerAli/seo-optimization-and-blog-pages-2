@@ -11,31 +11,73 @@ export const Route = createFileRoute("/blog/$slug")({
     const post = loaderData?.post;
     const title = post ? `${post.title} | SaaS Animate` : "Article | SaaS Animate";
     const description = post?.description ?? "SaaS animation insights from SaaS Animate.";
+    const url = `${SITE_URL}/blog/${params.slug}`;
+    const image = post ? `${SITE_URL}${post.image}` : `${SITE_URL}/og-image.png`;
+    const wordCount = post
+      ? post.body.reduce((n, b) => n + b.paragraphs.join(" ").split(/\s+/).length, 0)
+      : undefined;
     return {
       meta: [
         { title },
         { name: "description", content: description },
+        ...(post ? [{ name: "keywords", content: post.keywords.join(", ") }] : []),
+        ...(post ? [{ name: "author", content: post.author }] : []),
         { property: "og:title", content: post?.title ?? title },
         { property: "og:description", content: description },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: `/blog/${params.slug}` },
+        { property: "og:url", content: url },
+        { property: "og:image", content: image },
+        ...(post
+          ? [
+              { property: "article:published_time", content: post.date },
+              { property: "article:modified_time", content: post.dateModified },
+              { property: "article:section", content: post.category },
+            ]
+          : []),
+        { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: post?.title ?? title },
         { name: "twitter:description", content: description },
+        { name: "twitter:image", content: image },
       ],
-      links: [{ rel: "canonical", href: `/blog/${params.slug}` }],
+      links: [{ rel: "canonical", href: url }],
       scripts: post
-        ? [{
-            type: "application/ld+json",
-            children: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Article",
-              headline: post.title,
-              description: post.description,
-              datePublished: post.date,
-              author: { "@type": "Organization", name: "SaaS Animate" },
-              publisher: { "@type": "Organization", name: "SaaS Animate" },
-            }),
-          }]
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                mainEntityOfPage: { "@type": "WebPage", "@id": url },
+                headline: post.title,
+                description: post.description,
+                image: [image],
+                articleSection: post.category,
+                keywords: post.keywords.join(", "),
+                wordCount,
+                datePublished: post.date,
+                dateModified: post.dateModified,
+                author: { "@type": "Organization", name: post.author, url: SITE_URL },
+                publisher: {
+                  "@type": "Organization",
+                  name: "SaaS Animate",
+                  url: SITE_URL,
+                  logo: { "@type": "ImageObject", url: `${SITE_URL}/icon.svg` },
+                },
+              }),
+            },
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+                  { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+                  { "@type": "ListItem", position: 3, name: post.title, item: url },
+                ],
+              }),
+            },
+          ]
         : [],
     };
   },
