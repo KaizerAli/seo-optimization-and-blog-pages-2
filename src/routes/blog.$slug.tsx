@@ -9,28 +9,6 @@ export const Route = createFileRoute("/blog/$slug")({
     }
     return { post };
   },
-  head: ({ loaderData }) => {
-    const post = loaderData?.post;
-    if (!post) return { meta: [] };
-    
-    return {
-      meta: [
-        { title: `${post.title} | SaaS Animate Blog` },
-        { name: "description", content: post.description },
-        { name: "keywords", content: post.keywords.join(", ") },
-        { property: "og:title", content: post.title },
-        { property: "og:description", content: post.description },
-        { property: "og:type", content: "article" },
-        { property: "article:published_time", content: post.date },
-        { property: "article:modified_time", content: post.dateModified },
-        { property: "article:author", content: post.author },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: post.title },
-        { name: "twitter:description", content: post.description },
-      ],
-      links: [{ rel: "canonical", href: `/blog/${post.slug}` }],
-    };
-  },
   component: BlogPost,
 });
 
@@ -39,7 +17,7 @@ function BlogPost() {
 
   return (
     <article className="container-page pt-20 md:pt-28 pb-24 max-w-4xl">
-      <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
+      <Link to="/blog" className="inline-block text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
         ← Back to all posts
       </Link>
 
@@ -62,13 +40,7 @@ function BlogPost() {
         <div className="flex items-center gap-6 text-sm text-muted-foreground">
           <span>By {post.author}</span>
           <span>·</span>
-          <time dateTime={post.date}>
-            {new Date(post.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </time>
+          <time>{new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
         </div>
       </header>
 
@@ -97,20 +69,6 @@ function BlogPost() {
             ))}
           </div>
         ))}
-      </div>
-
-      <div className="mt-12 pt-8 border-t border-border/40">
-        <h3 className="text-sm font-mono text-muted-foreground mb-4">Tags</h3>
-        <div className="flex flex-wrap gap-2">
-          {post.keywords.map((keyword, index) => (
-            <span
-              key={index}
-              className="px-3 py-1 text-xs font-mono bg-surface hover:bg-surface/80 text-muted-foreground rounded-full transition-colors"
-            >
-              {keyword}
-            </span>
-          ))}
-        </div>
       </div>
 
       <div className="mt-16 surface-card p-8 md:p-12 text-center">
