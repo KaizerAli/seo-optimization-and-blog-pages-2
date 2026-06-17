@@ -39,12 +39,10 @@ function BlogPost() {
 
   return (
     <article className="container-page pt-20 md:pt-28 pb-24 max-w-4xl">
-      {/* Back Link */}
       <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8">
         ← Back to all posts
       </Link>
 
-      {/* Header */}
       <header className="mb-12">
         <div className="flex items-center gap-4 mb-6">
           <span className="px-3 py-1 text-xs font-mono bg-primary/10 text-primary rounded-full">
@@ -74,7 +72,6 @@ function BlogPost() {
         </div>
       </header>
 
-      {/* Featured Image */}
       {post.image && (
         <div className="relative aspect-video rounded-2xl overflow-hidden surface-card mb-12">
           <img
@@ -85,17 +82,16 @@ function BlogPost() {
         </div>
       )}
 
-      {/* Blog Content */}
-      <div className="prose prose-invert prose-lg max-w-none">
+      <div className="space-y-8">
         {post.body.map((section, index) => (
-          <div key={index} className="mb-8">
+          <div key={index}>
             {section.heading && (
               <h2 className="text-2xl md:text-3xl font-display mt-12 mb-6 text-primary">
                 {section.heading}
               </h2>
             )}
             {section.paragraphs.map((paragraph, pIndex) => (
-              <p key={pIndex} className="text-muted-foreground leading-relaxed mb-4">
+              <p key={pIndex} className="text-muted-foreground leading-relaxed mb-4 text-lg">
                 {paragraph}
               </p>
             ))}
@@ -103,8 +99,8 @@ function BlogPost() {
         ))}
       </div>
 
-      {/* Tags */}
       <div className="mt-12 pt-8 border-t border-border/40">
+        <h3 className="text-sm font-mono text-muted-foreground mb-4">Tags</h3>
         <div className="flex flex-wrap gap-2">
           {post.keywords.map((keyword, index) => (
             <span
@@ -117,7 +113,6 @@ function BlogPost() {
         </div>
       </div>
 
-      {/* CTA */}
       <div className="mt-16 surface-card p-8 md:p-12 text-center">
         <h3 className="text-2xl md:text-3xl font-display mb-4">
           Ready to create your explainer video?
