@@ -4,11 +4,16 @@ import { posts } from "../lib/blog-posts";
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "SaaS Animation Blog — Explainer Videos, Demos & UI Motion | SaaS Animate" },
-      { name: "description", content: "Strategy, production and pricing guides for SaaS animation: explainer videos, product demos, UI motion, launch films and brand motion." },
-      { property: "og:title", content: "SaaS Animation Blog — SaaS Animate" },
-      { property: "og:description", content: "Strategy, production and pricing guides for SaaS animation." },
+      { title: "Blog — SaaS Animation Insights & Guides | SaaS Animate" },
+      { name: "description", content: "Insights, guides and case studies on SaaS explainer videos, product demos, UI motion and launch films from the SaaS Animate team." },
+      { name: "keywords", content: "saas animation blog, explainer video insights, product demo guides, saas video marketing, motion design tips, launch video strategies" },
+      { property: "og:title", content: "Blog — SaaS Animate" },
+      { property: "og:description", content: "Insights and guides on SaaS explainer videos, product demos, UI motion and launch films." },
       { property: "og:url", content: "/blog" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Blog — SaaS Animate" },
+      { name: "twitter:description", content: "Insights and guides on SaaS explainer videos, product demos, UI motion and launch films." },
     ],
     links: [{ rel: "canonical", href: "/blog" }],
   }),
@@ -16,65 +21,41 @@ export const Route = createFileRoute("/blog")({
 });
 
 function Blog() {
-  const [featured, ...rest] = posts;
   return (
     <>
-      <section className="container-page pt-20 md:pt-28 pb-12 max-w-4xl">
-        <p className="eyebrow eyebrow-dot">Journal</p>
-        <h1 className="mt-6 text-5xl md:text-7xl">Notes on SaaS animation.</h1>
-        <p className="mt-6 text-lg text-muted-foreground">
-          Strategy, production playbooks and pricing transparency from inside the studio.
+      <section className="container-page pt-20 md:pt-28 pb-12">
+        <p className="eyebrow eyebrow-dot">Insights & guides</p>
+        <h1 className="mt-6 text-5xl md:text-7xl">The SaaS motion playbook.</h1>
+        <p className="mt-6 text-lg text-muted-foreground max-w-2xl">
+          Practical guides, case studies and frameworks from the SaaS Animate team. Everything we've learned from producing explainer videos, product demos and launch films for modern SaaS companies.
         </p>
       </section>
 
-      <section className="container-page pb-16">
-        <Link
-          to="/blog/$slug"
-          params={{ slug: featured.slug }}
-          className="block surface-card overflow-hidden hover:border-primary/40 transition-colors group"
-        >
-          <div className="grid md:grid-cols-2">
-            <div className="relative aspect-video md:aspect-auto bg-gradient-to-br from-[oklch(0.35_0.15_140)] via-[oklch(0.2_0.05_140)] to-background overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-display text-7xl text-primary/40">{featured.category}</span>
-              </div>
-            </div>
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <div className="flex gap-3 font-mono text-xs text-muted-foreground">
-                <span>{new Date(featured.date).toLocaleDateString("en", { year: "numeric", month: "short", day: "numeric" })}</span>
-                <span>·</span>
-                <span>{featured.readTime}</span>
-              </div>
-              <h2 className="mt-4 text-3xl md:text-4xl group-hover:text-primary transition-colors">{featured.title}</h2>
-              <p className="mt-4 text-muted-foreground">{featured.description}</p>
-              <span className="mt-6 text-sm text-primary">Read article →</span>
-            </div>
-          </div>
-        </Link>
-      </section>
-
       <section className="container-page pb-24">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {rest.map((p) => (
+        <div className="grid md:grid-cols-2 gap-6">
+          {posts.map((post) => (
             <Link
-              key={p.slug}
+              key={post.slug}
               to="/blog/$slug"
-              params={{ slug: p.slug }}
-              className="surface-card p-7 hover:border-primary/40 transition-colors group flex flex-col"
+              params={{ slug: post.slug }}
+              className="surface-card overflow-hidden hover:border-primary/40 transition-colors group flex flex-col"
             >
-              <div className="flex justify-between items-center font-mono text-xs text-muted-foreground">
-                <span>{p.category}</span>
-                <span>{p.readTime}</span>
-              </div>
-              <h3 className="mt-4 text-xl group-hover:text-primary transition-colors">{p.title}</h3>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed flex-1">{p.description}</p>
-              <span className="mt-6 font-mono text-xs text-muted-foreground">
-                {new Date(p.date).toLocaleDateString("en", { year: "numeric", month: "short", day: "numeric" })}
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-    </>
-  );
-}
+              {post.image && (
+                <div className="relative aspect-video overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              )}
+              <div className="p-6 flex-1 flex flex-col">
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="px-3 py-1 text-xs font-mono bg-primary/10 text-primary rounded-full">
+                    {post.category}
+                  </span>
+                  <span className="text-xs text-muted-foreground">{post.readTime}</span>
+                </div>
+                
+                <h2 className="text-2xl group-hover:text-primary transition-colors mb-3">
+                 
