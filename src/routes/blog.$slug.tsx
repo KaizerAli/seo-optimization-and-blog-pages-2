@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { getPostBySlug } from "../lib/blog-posts";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { getPostBySlug, posts, type BlogPost } from "../lib/blog-posts";
+import { SITE_URL } from "../lib/seo";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
