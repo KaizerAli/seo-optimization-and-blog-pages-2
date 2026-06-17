@@ -26,8 +26,7 @@ type Work = {
   category: string;
   metric: string;
   gradient: string;
-  video?: string;
-  poster?: string;
+  image: string;
   span?: string;
 };
 
@@ -38,8 +37,7 @@ const works: Work[] = [
     category: "Launch", 
     metric: "+184% demo signups", 
     gradient: "from-[oklch(0.45_0.18_280)] to-[oklch(0.2_0.05_280)]",
-    video: "/videos/saas-explainer.mp4",
-    poster: "/videos/poster-explainer.png",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop",
     span: "md:col-span-2 md:row-span-2" 
   },
   { 
@@ -48,8 +46,7 @@ const works: Work[] = [
     category: "Explainer", 
     metric: "+62% activation", 
     gradient: "from-[oklch(0.55_0.15_180)] to-[oklch(0.2_0.05_200)]",
-    video: "/videos/saas-demo.mp4",
-    poster: "/videos/poster-demo.png"
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop"
   },
   { 
     client: "Helio", 
@@ -57,8 +54,7 @@ const works: Work[] = [
     category: "Demo", 
     metric: "2.3x trial→paid", 
     gradient: "from-[oklch(0.7_0.18_60)] to-[oklch(0.25_0.05_40)]",
-    video: "/videos/ui-motion.mp4",
-    poster: "/videos/poster-explainer.png"
+    image: "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=800&h=450&fit=crop"
   },
   { 
     client: "Northwind", 
@@ -66,8 +62,7 @@ const works: Work[] = [
     category: "UI Motion", 
     metric: "Shipped to 40k users", 
     gradient: "from-[oklch(0.55_0.18_140)] to-[oklch(0.2_0.05_140)]",
-    video: "/videos/ui-motion.mp4",
-    poster: "/videos/poster-demo.png",
+    image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&h=450&fit=crop",
     span: "md:col-span-2" 
   },
   { 
@@ -76,8 +71,7 @@ const works: Work[] = [
     category: "Launch", 
     metric: "#1 Product of the Day", 
     gradient: "from-[oklch(0.6_0.22_20)] to-[oklch(0.2_0.05_20)]",
-    video: "/videos/saas-explainer.mp4",
-    poster: "/videos/poster-explainer.png"
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=450&fit=crop"
   },
   { 
     client: "Orbital", 
@@ -85,8 +79,7 @@ const works: Work[] = [
     category: "Brand", 
     metric: "1.2M views in week 1", 
     gradient: "from-[oklch(0.5_0.12_240)] to-[oklch(0.18_0.04_240)]",
-    video: "/videos/saas-demo.mp4",
-    poster: "/videos/poster-demo.png"
+    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=450&fit=crop"
   },
   { 
     client: "Pulse", 
@@ -94,8 +87,7 @@ const works: Work[] = [
     category: "Explainer", 
     metric: "+41% pricing→demo", 
     gradient: "from-[oklch(0.65_0.2_320)] to-[oklch(0.2_0.05_320)]",
-    video: "/videos/ui-motion.mp4",
-    poster: "/videos/poster-explainer.png"
+    image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=450&fit=crop"
   },
 ];
 
@@ -118,21 +110,14 @@ function Portfolio() {
               className={`surface-card overflow-hidden hover:border-primary/40 transition-colors group flex flex-col ${w.span || ""}`}
             >
               <div className={`relative aspect-video bg-gradient-to-br ${w.gradient} overflow-hidden`}>
-                {w.video && (
-                  <video
-                    className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                    poster={w.poster}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  >
-                    <source src={w.video} type="video/mp4" />
-                  </video>
-                )}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-mono text-xs text-white/80 bg-black/40 px-3 py-1 rounded-full">
-                    ▶ Play
+                <img
+                  src={w.image}
+                  alt={`${w.client} - ${w.project}`}
+                  className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="font-mono text-xs text-white bg-black/60 px-4 py-2 rounded-full">
+                    View Case Study →
                   </span>
                 </div>
               </div>
